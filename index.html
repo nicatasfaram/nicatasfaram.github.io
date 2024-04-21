@@ -38,11 +38,19 @@
           document.getElementById('header').innerHTML = html;
         });
 
-      fetch('pages/home.html')
+      window.onload = function(){
+          LoadPage('home');
+      };
+
+    function LoadPage(link){
+      document.getElementById('content').innerHTML = "";
+      fetch('pages/' + link + '.html')
         .then(response => response.text())
         .then(html => {
           document.getElementById('content').innerHTML = html;
         });
+    };
+    
     </script>
   </body>
 </html>
