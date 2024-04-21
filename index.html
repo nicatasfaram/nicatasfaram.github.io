@@ -8,7 +8,6 @@
         
     <!-- Custom styles for this template -->
     <link href="css/carousel.css" rel="stylesheet">
-
     <link href="css/custom.css" rel="stylesheet">
     
   </head>
@@ -38,13 +37,12 @@
           document.getElementById('header').innerHTML = html;
         });
 
-        fetch('pages/home.html')
+      fetch('pages/home.html')
         .then(response => response.text())
         .then(html => {
           document.getElementById('content').innerHTML = html;
         });
 
-      
     </script>
 
   </body>
