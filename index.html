@@ -1,4 +1,99 @@
-<!doctype html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geolocation Example</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0; /* Light gray background */
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50; /* Green */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 20px; /* Space below the button */
+        }
+
+        button:hover {
+            background-color: #45a049; /* Darker green on hover */
+        }
+
+        #locationLink {
+            margin-top: 10px; /* Space above the link */
+            padding: 8px 16px;
+            background-color: #007bff; /* Blue */
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        #locationLink:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+        }
+
+        #locationDisplay { /* Style for displaying coordinates directly */
+            margin-top: 10px;
+            font-size: 16px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <button onclick="myButtonCallback()">Get My Location</button>
+    <div id="locationDisplay"></div> <a id="locationLink" target="_blank"></a>
+
+<script>
+
+    function getPosition() {
+        return new Promise((res, rej) => {
+            navigator.geolocation.getCurrentPosition(res, rej);
+        });
+    }
+
+    async function myButtonCallback(){
+        try {
+            var position = await getPosition();
+            var coords = position.coords;
+
+            // Display coordinates in a div
+            document.getElementById('locationDisplay').textContent = `Latitude: ${coords.latitude}, Longitude: ${coords.longitude}`;
+
+            // Create and update the link
+            var locationLink = document.getElementById('locationLink');
+            locationLink.href = `http://google.com/maps/place/${coords.latitude},${coords.longitude}`; // Updated link
+            locationLink.textContent = "View on Google Maps"; // More user-friendly text
+
+
+        } catch (error) {
+            // Handle errors, e.g., if the user denies location access
+            console.error("Error getting location:", error);
+            document.getElementById('locationDisplay').textContent = "Error getting location. Please enable location services.";
+
+        }
+    }
+
+</script>
+
+</body>
+</html>
+
+
+
+
+<!-- <!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -80,4 +175,4 @@
     
     </script>
   </body>
-</html>
+</html> -->
